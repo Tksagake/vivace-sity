@@ -74,6 +74,8 @@ export const useDownloaderStore = create<DownloaderState>((set, get) => ({
     try {
       const history = await fetchHistory()
       set({ history })
+    } catch {
+      set({ history: [] })
     } finally {
       set({ loadingHistory: false })
     }

@@ -19,10 +19,10 @@ function StatusBadge({ status }: { status: DownloadTask['status'] }) {
 }
 
 export function QueuePanel() {
-  const queue = useDownloaderStore((state) => Object.values(state.queue))
+  const queue = useDownloaderStore((state) => state.queue)
   const upsertTask = useDownloaderStore((state) => state.upsertTask)
 
-  const sorted = [...queue].sort((a, b) => b.percent - a.percent)
+  const sorted = Object.values(queue).sort((a, b) => b.percent - a.percent)
 
   return (
     <GlassCard className="space-y-4">
