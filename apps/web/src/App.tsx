@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { getProgressStreamUrl } from './lib/api'
-import { AnimatedBackground } from './components/AnimatedBackground'
 import { DownloaderPanel } from './components/DownloaderPanel'
 import { HistoryPanel } from './components/HistoryPanel'
 import { QueuePanel } from './components/QueuePanel'
@@ -62,19 +61,18 @@ function App() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden text-white">
-      <AnimatedBackground />
+    <main className="min-h-screen bg-slate-950 text-white">
       <Toasts />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-8 md:px-6">
+      <div className="mx-auto max-w-6xl px-4 pb-10 pt-8 md:px-6">
         <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/90">Vivace-sity</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Vivace-sity</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-5xl">
-              High-energy local downloader for creators.
+              Download YouTube video and audio locally.
             </h1>
-            <p className="mt-3 max-w-2xl text-sm text-slate-200/90 md:text-base">
-              Cinematic YouTube extraction powered by yt-dlp + FFmpeg with real-time rhythm visuals.
+            <p className="mt-3 max-w-2xl text-sm text-slate-300 md:text-base">
+              A straightforward downloader powered by yt-dlp and FFmpeg.
             </p>
           </div>
           <ThemeToggle />
