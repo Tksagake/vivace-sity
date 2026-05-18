@@ -11,9 +11,9 @@ function StatusBadge({ status }: { status: DownloadTask['status'] }) {
       ? 'text-emerald-300 border-emerald-300/40 bg-emerald-400/10'
       : status === 'failed'
         ? 'text-rose-300 border-rose-300/40 bg-rose-400/10'
-        : status === 'cancelled'
+      : status === 'cancelled'
           ? 'text-orange-300 border-orange-300/40 bg-orange-400/10'
-          : 'text-cyan-200 border-cyan-200/30 bg-cyan-400/10'
+          : 'text-slate-200 border-slate-300/30 bg-slate-700/40'
 
   return <span className={`rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.16em] ${tone}`}>{status}</span>
 }
@@ -27,15 +27,15 @@ export function QueuePanel() {
   return (
     <GlassCard className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-white">Live Queue</h3>
+        <h3 className="text-lg font-semibold text-white">Queue</h3>
         <span className="text-xs uppercase tracking-[0.14em] text-slate-300">{sorted.length} active / recent</span>
       </div>
 
-      {sorted.length === 0 && <p className="text-sm text-slate-300">Queue is silent. Start a new drop.</p>}
+      {sorted.length === 0 && <p className="text-sm text-slate-300">No active downloads.</p>}
 
       <div className="space-y-3">
         {sorted.map((task) => (
-          <motion.article key={task.id} layout className="rounded-2xl border border-white/15 bg-black/25 p-3">
+          <motion.article key={task.id} layout className="rounded-2xl border border-slate-500/30 bg-slate-900/50 p-3">
             <div className="mb-2 flex items-center justify-between gap-2">
               <StatusBadge status={task.status} />
               <button
@@ -57,7 +57,7 @@ export function QueuePanel() {
 
             <div className="mb-2 h-2 rounded-full bg-white/10">
               <div
-                className="h-2 rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 transition-all duration-300"
+                className="h-2 rounded-full bg-slate-300 transition-all duration-300"
                 style={{ width: `${Math.min(100, Math.max(0, task.percent))}%` }}
               />
             </div>
