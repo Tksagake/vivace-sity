@@ -8,7 +8,13 @@ export async function ensureDir(dir: string): Promise<void> {
 
 export function safeOutputTemplate(baseDir: string): string {
   const safeName = sanitize('%(title)s') || 'media'
-  return path.join(baseDir, `${safeName}-%(id)s.%(ext)s`)
+  const maxNameLength = 80
+  const trimmed = safeName.slice(0, maxNameLength)
+  return path.join(baseDir, `${trimmed}-%(id)s.%(ext)s`)
+}
+
+export function taskWorkspacePath(tempDir: string, taskId: string): string {
+  return path.join(tempDir, taskId)
 }
 
 export async function cleanupOldFiles(dir: string, maxAgeMs: number): Promise<void> {
@@ -17,12 +23,11 @@ export async function cleanupOldFiles(dir: string, maxAgeMs: number): Promise<vo
 
   await Promise.all(
     entries
-      .filter((entry) => entry.isFile())
       .map(async (entry) => {
         const filePath = path.join(dir, entry.name)
         const stat = await fs.stat(filePath)
         if (now - stat.mtimeMs > maxAgeMs) {
-          await fs.rm(filePath, { force: true })
+          await fs.rm(filePath, { force: true, recursive: true })
         }
       }),
   )

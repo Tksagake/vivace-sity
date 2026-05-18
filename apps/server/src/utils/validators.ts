@@ -1,16 +1,18 @@
 import { z } from 'zod'
 
-const youtubeHostRegex = /(^|\.)youtube\.com$|(^|\.)youtu\.be$/i
+const allowedHosts = new Set(['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'])
+
+function isAllowedYouTubeHost(value: string): boolean {
+  const hostname = new URL(value).hostname.toLowerCase().replace(/\.$/, '')
+  return allowedHosts.has(hostname)
+}
 
 export const infoRequestSchema = z.object({
   url: z
     .string()
     .trim()
     .url()
-    .refine((value) => {
-      const host = new URL(value).hostname
-      return youtubeHostRegex.test(host)
-    }, 'Only YouTube URLs are supported'),
+    .refine((value) => isAllowedYouTubeHost(value), 'Only YouTube URLs are supported'),
 })
 
 export const downloadRequestSchema = infoRequestSchema.extend({

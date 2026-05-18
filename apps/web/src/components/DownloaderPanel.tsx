@@ -94,6 +94,9 @@ export function DownloaderPanel({ onTaskCreated }: DownloaderPanelProps) {
   }, [pushToast, setUrl])
 
   useClipboardDetector((detected) => {
+    if (currentUrl) {
+      return
+    }
     setUrl(detected)
     setRequest((prev) => ({ ...prev, url: detected }))
   })

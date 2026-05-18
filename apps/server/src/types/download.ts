@@ -4,8 +4,9 @@ export type DownloadStatus =
   | 'queued'
   | 'fetching-info'
   | 'downloading'
-  | 'converting'
+  | 'postprocessing'
   | 'completed'
+  | 'cleaned'
   | 'failed'
   | 'cancelled'
 

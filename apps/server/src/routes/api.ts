@@ -16,17 +16,34 @@ export function createApiRouter(controller: DownloadController, progressHub: Pro
     const id = req.params.id
 
     res.setHeader('Content-Type', 'text/event-stream')
-    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('Cache-Control', 'no-cache, no-transform')
     res.setHeader('Connection', 'keep-alive')
     res.flushHeaders()
 
-    progressHub.subscribe(id, res)
-    res.write(': connected\n\n')
+    const heartbeat = setInterval(() => {
+      if (!res.writableEnded) {
+        try {
+          res.write(': ping\n\n')
+        } catch {
+          cleanup()
+        }
+      }
+    }, 15000)
 
-    req.on('close', () => {
+    progressHub.subscribe(id, res)
+    res.write(`data: ${JSON.stringify({ type: 'connected', taskId: id })}\n\n`)
+
+    const cleanup = (): void => {
+      clearInterval(heartbeat)
       progressHub.unsubscribe(id, res)
-      res.end()
-    })
+      if (!res.writableEnded) {
+        res.end()
+      }
+    }
+
+    req.on('close', cleanup)
+    req.on('error', cleanup)
+    res.on('error', cleanup)
   })
 
   return router

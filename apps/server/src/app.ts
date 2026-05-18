@@ -19,7 +19,9 @@ const downloadManager = new DownloadManager(
   env.YTDLP_BIN,
   env.FFMPEG_BIN,
   env.DOWNLOAD_DIR,
+  env.TEMP_DIR,
   env.MAX_CONCURRENT_DOWNLOADS,
+  env.TASK_RETENTION_MS,
   progressHub,
   historyStore,
 )
