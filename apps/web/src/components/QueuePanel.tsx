@@ -5,7 +5,7 @@ import { useDownloaderStore } from '../store/useDownloaderStore'
 import type { DownloadTask } from '../types'
 import { GlassCard } from './GlassCard'
 
-function StatusBadge({ status }: { status: DownloadTask['status'] }): JSX.Element {
+function StatusBadge({ status }: { status: DownloadTask['status'] }) {
   const tone =
     status === 'completed'
       ? 'text-emerald-300 border-emerald-300/40 bg-emerald-400/10'
@@ -18,7 +18,7 @@ function StatusBadge({ status }: { status: DownloadTask['status'] }): JSX.Elemen
   return <span className={`rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.16em] ${tone}`}>{status}</span>
 }
 
-export function QueuePanel(): JSX.Element {
+export function QueuePanel() {
   const queue = useDownloaderStore((state) => Object.values(state.queue))
   const upsertTask = useDownloaderStore((state) => state.upsertTask)
 

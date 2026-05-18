@@ -5,7 +5,7 @@ interface GlassCardProps extends PropsWithChildren {
   className?: string
 }
 
-export function GlassCard({ className, children }: GlassCardProps): JSX.Element {
+export function GlassCard({ className, children }: GlassCardProps) {
   return (
     <section
       className={clsx(

@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import { rateLimit } from 'express-rate-limit'
+import { ipKeyGenerator, rateLimit } from 'express-rate-limit'
 import { env } from './config/env.js'
 import { DownloadController } from './controllers/downloadController.js'
 import { errorHandler } from './middleware/errorHandler.js'
@@ -40,7 +40,7 @@ app.use(
     limit: env.RATE_LIMIT_MAX,
     standardHeaders: 'draft-8',
     legacyHeaders: false,
-    keyGenerator: (req) => req.ip?.replace(/^::ffff:/, '') || 'unknown',
+    keyGenerator: (req) => ipKeyGenerator(req.ip ?? '127.0.0.1'),
   }),
 )
 

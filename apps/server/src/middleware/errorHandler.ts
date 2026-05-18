@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 
-export function errorHandler(error: unknown, _req: Request, res: Response, _next: NextFunction): void {
+export function errorHandler(error: unknown, _req: Request, res: Response, next: NextFunction): void {
+  void next
   if (error instanceof Error) {
     res.status(500).json({ error: error.message })
     return

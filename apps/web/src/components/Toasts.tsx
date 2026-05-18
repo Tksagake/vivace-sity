@@ -3,7 +3,7 @@ import { CircleAlert, CircleCheck, Info } from 'lucide-react'
 import { useEffect } from 'react'
 import { useDownloaderStore } from '../store/useDownloaderStore'
 
-export function Toasts(): JSX.Element {
+export function Toasts() {
   const toasts = useDownloaderStore((state) => state.toasts)
   const dismiss = useDownloaderStore((state) => state.dismissToast)
 

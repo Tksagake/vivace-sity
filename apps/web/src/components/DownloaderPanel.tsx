@@ -23,7 +23,7 @@ interface DownloaderPanelProps {
   onTaskCreated: (id: string) => void
 }
 
-export function DownloaderPanel({ onTaskCreated }: DownloaderPanelProps): JSX.Element {
+export function DownloaderPanel({ onTaskCreated }: DownloaderPanelProps) {
   const url = useDownloaderStore((state) => state.url)
   const setUrl = useDownloaderStore((state) => state.setUrl)
   const metadata = useDownloaderStore((state) => state.metadata)

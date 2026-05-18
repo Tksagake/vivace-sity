@@ -1,0 +1,17 @@
+services:
+  vivace-sity:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      NODE_ENV: production
+      PORT: 8787
+      DOWNLOAD_DIR: /app/storage/downloads
+      TEMP_DIR: /app/storage/tmp
+      HISTORY_FILE: /app/storage/data/history.json
+      MAX_CONCURRENT_DOWNLOADS: 2
+    volumes:
+      - vivace_sity_storage:/app/storage
+
+volumes:
+  vivace_sity_storage:

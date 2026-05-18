@@ -1,7 +1,7 @@
 import { Moon, Sun } from 'lucide-react'
 import { useDownloaderStore } from '../store/useDownloaderStore'
 
-export function ThemeToggle(): JSX.Element {
+export function ThemeToggle() {
   const theme = useDownloaderStore((state) => state.theme)
   const toggleTheme = useDownloaderStore((state) => state.toggleTheme)
 

@@ -1,17 +1,17 @@
 {
   "name": "vivace-sity",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "private": "true",
+  "private": true,
+  "description": "Vivace-sity: cinematic local multimedia downloader powered by yt-dlp and FFmpeg",
   "workspaces": [
     "apps/web",
     "apps/server"
-  ]
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w apps/web",
+    "dev:server": "npm run dev -w apps/server",
+    "build": "npm run build -w apps/server && npm run build -w apps/web",
+    "lint": "npm run lint -w apps/server && npm run lint -w apps/web",
+    "test": "npm run test -w apps/server && npm run test -w apps/web"
+  }
 }

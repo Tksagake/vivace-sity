@@ -1,0 +1,12 @@
+node_modules/
+apps/*/node_modules/
+apps/*/dist/
+*.log
+.env
+.env.*
+!.env.example
+downloads/
+apps/server/downloads/
+apps/server/tmp/
+apps/server/data/
+.DS_Store

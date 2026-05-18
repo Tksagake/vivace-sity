@@ -9,7 +9,7 @@ import { Toasts } from './components/Toasts'
 import { useDownloaderStore } from './store/useDownloaderStore'
 import type { DownloadTask } from './types'
 
-function App(): JSX.Element {
+function App() {
   const hydrateHistory = useDownloaderStore((state) => state.hydrateHistory)
   const upsertTask = useDownloaderStore((state) => state.upsertTask)
   const theme = useDownloaderStore((state) => state.theme)
@@ -25,9 +25,10 @@ function App(): JSX.Element {
   }, [theme])
 
   useEffect(() => {
+    const streams = streamsRef.current
     return () => {
-      streamsRef.current.forEach((stream) => stream.close())
-      streamsRef.current.clear()
+      streams.forEach((stream) => stream.close())
+      streams.clear()
     }
   }, [])
 

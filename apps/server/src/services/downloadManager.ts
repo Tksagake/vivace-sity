@@ -1,4 +1,5 @@
-import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process'
+import { spawn, type ChildProcessByStdio } from 'node:child_process'
+import type { Readable } from 'node:stream'
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 import type {
@@ -17,7 +18,7 @@ interface QueueTask {
   options: DownloadOptions
   createdAt: string
   media?: MediaInfo
-  child?: ChildProcessWithoutNullStreams
+  child?: ChildProcessByStdio<null, Readable, Readable>
 }
 
 export class DownloadManager {
@@ -180,7 +181,7 @@ export class DownloadManager {
         const text = buffer.toString()
         text
           .split('\n')
-          .map((line) => line.trim())
+          .map((line: string) => line.trim())
           .filter(Boolean)
           .forEach(handleProgressLine)
       })
@@ -189,7 +190,7 @@ export class DownloadManager {
         const text = buffer.toString()
         text
           .split('\n')
-          .map((line) => line.trim())
+          .map((line: string) => line.trim())
           .filter(Boolean)
           .forEach(handleProgressLine)
       })

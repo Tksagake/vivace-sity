@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import { spawn } from 'node:child_process'
+import path from 'node:path'
 import { app } from './app.js'
 import { env } from './config/env.js'
 import { cleanupOldFiles, ensureDir } from './utils/files.js'
@@ -22,12 +23,7 @@ async function bootstrap(): Promise<void> {
   await Promise.all([
     ensureDir(env.DOWNLOAD_DIR),
     ensureDir(env.TEMP_DIR),
-    ensureDir(new URL('.', `file://${env.HISTORY_FILE}`).pathname).catch(async () => {
-      const fallback = env.HISTORY_FILE.split('/').slice(0, -1).join('/')
-      if (fallback) {
-        await ensureDir(fallback)
-      }
-    }),
+    ensureDir(path.dirname(env.HISTORY_FILE)),
   ])
 
   try {

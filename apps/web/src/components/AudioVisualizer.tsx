@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 const bars = Array.from({ length: 28 })
 
-export function AudioVisualizer(): JSX.Element {
+export function AudioVisualizer() {
   return (
     <div className="mt-4 flex h-16 items-end justify-center gap-1 opacity-80">
       {bars.map((_, index) => (

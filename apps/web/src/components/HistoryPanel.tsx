@@ -2,7 +2,7 @@ import { Download } from 'lucide-react'
 import { useDownloaderStore } from '../store/useDownloaderStore'
 import { GlassCard } from './GlassCard'
 
-export function HistoryPanel(): JSX.Element {
+export function HistoryPanel() {
   const history = useDownloaderStore((state) => state.history)
   const loading = useDownloaderStore((state) => state.loadingHistory)
 
